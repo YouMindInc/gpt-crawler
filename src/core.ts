@@ -84,7 +84,7 @@ export async function crawl(config: Config) {
             }
           }
 
-          const html = await getPageHtml(page, config.selector);
+          const html = await getPageHtml(page, config.selector || undefined);
 
           // Save results as JSON to ./storage/datasets/default
           await pushData({ title, url: request.loadedUrl, html });
