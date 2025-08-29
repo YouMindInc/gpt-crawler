@@ -140,6 +140,12 @@ app.get("/", (_req, res) => {
 app.post("/crawl", async (req, res) => {
   const config: Config = req.body;
   try {
+    if (config.selector === "") {
+      delete config.selector;
+    }
+    if (config.exclude === "") {
+      delete config.exclude;
+    }
     const validatedConfig = configSchema.parse(config);
     const crawler = new GPTCrawlerCore(validatedConfig);
     await crawler.crawl();
