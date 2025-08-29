@@ -12,6 +12,11 @@ let crawler: PlaywrightCrawler;
 
 export function getPageHtml(page: Page, selector = "body") {
   return page.evaluate((selector) => {
+    // Use default selector if empty or undefined
+    if (!selector || selector.trim() === "") {
+      selector = "body";
+    }
+    
     // Check if the selector is an XPath
     if (selector.startsWith("/")) {
       const elements = document.evaluate(
